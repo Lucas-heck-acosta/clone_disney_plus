@@ -1,7 +1,26 @@
 document.addEventListener('DOMContentLoaded', function() {
     const buttons = document.querySelectorAll('[data-tab-button]');
-    const questions = document.querySelectorAll('[data-faq-question')
+    const questions = document.querySelectorAll('[data-faq-question');
+    const heroSection = document.querySelector('.hero');
+    
+    const alturaHero = heroSection.clientHeight;
 
+    //header
+    window.addEventListener('scroll', function() {
+        const position = window.scrollY;
+
+        if (position < alturaHero)
+        {
+            ocultarHeader();
+        }
+        else
+        {
+            exibirHeader();
+        }
+    })
+
+
+    // atrações
     for (let i = 0; i < buttons.length; i++)
     {
         buttons[i].addEventListener('click', function(botao) {
@@ -15,7 +34,7 @@ document.addEventListener('DOMContentLoaded', function() {
         })
     }
 
-
+    // FAQ accordion
     for (let i = 0; i < questions.length; i++)
     {
         questions[i].addEventListener('click', abreFecha);
@@ -28,6 +47,17 @@ function abreFecha(elemento) {
     const elementoPai = elemento.target.parentNode;
 
     elementoPai.classList.toggle(classe);
+}
+
+function ocultarHeader ()
+{
+    const header = document.querySelector('header');
+    header.classList.add('header--is-hidden');
+}
+function exibirHeader ()
+{
+    const header = document.querySelector('header');
+    header.classList.remove('header--is-hidden');
 }
 
 function esconderBtnAtivo()
